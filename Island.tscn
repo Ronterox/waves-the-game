@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://vae6pwywosvd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eur2k"]
+albedo_color = Color(1, 0.784314, 0.427451, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_34vmf"]
+material = SubResource("StandardMaterial3D_eur2k")
+radius = 40.0
+height = 20.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4lixq"]
+radius = 31.0591
+
+[node name="Island" type="RigidBody3D"]
+mass = 300.0
+gravity_scale = 0.0
+
+[node name="IslandMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+mesh = SubResource("SphereMesh_34vmf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_4lixq")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3uxopjet5jqs"]
+
+[ext_resource type="Script" path="res://Boat.gd" id="1_4muth"]
+[ext_resource type="PackedScene" uid="uid://bg1qinoldiyxp" path="res://assets/Sail Boat.glb" id="2_hh0jb"]
+[ext_resource type="AudioStream" uid="uid://cg5dbmkxyj54c" path="res://assets/windwaker.mp3" id="3_lq06n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f3ixg"]
+size = Vector3(1.1853, 0.465942, 2.58218)
+
+[node name="Boat" type="CharacterBody3D"]
+script = ExtResource("1_4muth")
+
+[node name="Mesh" parent="." instance=ExtResource("2_hh0jb")]
+transform = Transform3D(-3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03479, 0.267029, -0.0212555)
+shape = SubResource("BoxShape3D_f3ixg")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 4, 6)
+
+[node name="Music" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_lq06n")
+autoplay = true
+parameters/looping = true
+
+[connection signal="anchored" from="." to="." method="_on_anchored"]
