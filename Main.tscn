@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://v7aupbutba1c"]
 
+[ext_resource type="Script" path="res://World.gd" id="1_amlel"]
 [ext_resource type="PackedScene" uid="uid://d3uxopjet5jqs" path="res://Boat.tscn" id="1_dhgcv"]
 [ext_resource type="PackedScene" uid="uid://vae6pwywosvd" path="res://Island.tscn" id="1_hwln2"]
 [ext_resource type="Shader" path="res://Water.gdshader" id="1_x3k7l"]
-[ext_resource type="PackedScene" uid="uid://2fcchhs05ccw" path="res://ProceduralGenerator.tscn" id="4_2pqsq"]
 [ext_resource type="Script" path="res://UI.gd" id="4_x7376"]
 [ext_resource type="LabelSettings" uid="uid://cw15cqkuuvrlo" path="res://configurations/Label.tres" id="5_4orlb"]
 
@@ -35,8 +35,9 @@ shader_parameter/shadow_intensity = 0.3
 material = SubResource("ShaderMaterial_s37kc")
 size = Vector2(1000, 1000)
 
-[node name="WorldEnvironment" type="WorldEnvironment"]
+[node name="World" type="WorldEnvironment"]
 environment = SubResource("Environment_sleiv")
+script = ExtResource("1_amlel")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.966187, 0.257841, 0, -0.257841, -0.966187, -0.0157547, 36.9585, 0)
@@ -49,9 +50,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.8536, 0, -189.425)
 mesh = SubResource("PlaneMesh_jyw80")
 
 [node name="Boat" parent="." instance=ExtResource("1_dhgcv")]
-
-[node name="ProceduralGenerator" parent="." instance=ExtResource("4_2pqsq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -42.2213)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

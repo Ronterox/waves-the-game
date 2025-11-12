@@ -7,9 +7,3 @@
 script = ExtResource("1_c2te2")
 
 [node name="Block" parent="." instance=ExtResource("1_oqr3r")]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.871479, 0.490432, 0, -0.490432, 0.871479, 5, 10, 20)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.383167, 0.923679, 0, -0.923679, 0.383167, 0, 1.56494, 0)

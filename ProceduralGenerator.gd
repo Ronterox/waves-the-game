@@ -1,19 +1,23 @@
 extends Node3D
 
-@export var SIZE = 10
+class_name ProceduralGenerator
+
+@export var SIZE: int = 10
+@export var frecuency: float = 0.1
+@export var amplitude: int = 10;
+
 var current_angle = 0
-
-func randb() -> bool:
-	return randi_range(0, 1) as bool
-
+var camera: Camera3D
 
 func generate() -> void:
 	var block: StaticBody3D = $Block
 	for i in SIZE:
-		for j in SIZE:
-			for k in SIZE:
-				var surface = 1 + sin(k) * SIZE
-				if randb() or j < surface:
+		var x = sin(i * frecuency) * amplitude
+		for k in SIZE:
+			var z = sin(k * frecuency) * amplitude
+			var surface = 1 + x + z
+			for j in SIZE:
+				if j < surface:
 					var b: StaticBody3D = block.duplicate()
 					b.position = Vector3(i, j, k)
 					b.set_meta("is_clone", true)
@@ -21,15 +25,16 @@ func generate() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if get_tree().current_scene is ProceduralGenerator:
+		camera = Camera3D.new()
+		add_child(camera)
+		camera.add_child(DirectionalLight3D.new())
 	generate()
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		for child in get_children():
-			if child.get_meta("is_clone", false):
-				child.queue_free()
-		generate()
-	
+	if not camera:
+		return
+		
 	const distance = 15
 	const rotation_speed = 1
 	const height = 10
@@ -43,7 +48,13 @@ func _process(delta: float) -> void:
 	)
 	
 	# Set camera position
-	$Camera3D.position = camera_pos
+	camera.position = camera_pos
 	
 	# Make camera look at target
-	$Camera3D.look_at($Block.global_position)
+	camera.look_at($Block.global_position)
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		for child in get_children():
+			if child.get_meta("is_clone", false):
+				child.queue_free()
+		generate()
