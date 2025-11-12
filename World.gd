@@ -17,6 +17,6 @@ func generate_world(structures: int) -> void:
 func _ready() -> void:
 	scene = preload("res://ProceduralGenerator.tscn")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		generate_world(2)

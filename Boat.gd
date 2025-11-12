@@ -18,17 +18,18 @@ var bob_amount = 0.2
 var bob_speed_max = 1.2
 var bob_speed = 1.2
 
-var anchor = true
-signal anchored(anchor: bool)
+var anchor: float = 0
+signal anchored(anchor: float)
 
 func _ready() -> void:
-	anchored.emit(true)
+	anchored.emit(0.0)
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_down"):
-		anchored.emit(true)
-	elif Input.is_action_just_pressed("ui_up"):
-		anchored.emit(false)
+	const boost = 0.5
+	if Input.is_action_just_pressed("ui_up"):
+		anchored.emit(max(min(1, anchor + boost), 0))
+	elif Input.is_action_just_pressed("ui_down"):
+		anchored.emit(max(min(1, anchor - boost), 0))
 
 func _physics_process(delta):
 	# Get input from the Up/Down arrow keys
@@ -36,7 +37,7 @@ func _physics_process(delta):
 	# Get input from the Left/Right arrow keys
 	var turn_input = Input.get_axis("ui_left", "ui_right")
 	
-	if anchor:
+	if anchor <= 0:
 		bob_speed *= 0.99
 	
 	var music: AudioStreamPlayer3D = $Music
@@ -44,8 +45,8 @@ func _physics_process(delta):
 	
 	# Smoothly change speed
 	# If we are pressing up or down, move towards our max speed.
-	if not anchor:
-		current_speed = move_toward(current_speed, max_speed, acceleration * delta)
+	if anchor > 0:
+		current_speed = move_toward(current_speed, max_speed * anchor, acceleration * delta)
 	# Otherwise, slow down to a stop.
 	else:
 		current_speed = move_toward(current_speed, 0.0, deceleration * delta)
@@ -72,7 +73,6 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _on_anchored(is_anchor: bool) -> void:
-	anchor = is_anchor
-	if not anchor:
-		bob_speed = bob_speed_max
+func _on_anchored(curr_anchor: float) -> void:
+	anchor = curr_anchor
+	bob_speed = bob_speed_max * anchor

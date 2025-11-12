@@ -12,5 +12,5 @@ func _process(_delta: float) -> void:
 	$MarginContainer/Speed.text = "%.2f m/s" % speed
 
 
-func _on_boat_anchored(anchor: bool) -> void:
-	$MarginContainer/State.text = "Anchored." if anchor else "Boating..."
+func _on_boat_anchored(anchor: float) -> void:
+	$MarginContainer/State.text = "Anchored." if anchor <= 0 else "Boating..."
