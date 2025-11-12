@@ -13,9 +13,18 @@ config_version=5
 config/name="Waves The Game"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://assets/icon.svg"
+config/icon="res://assets/icon.png"
 
 [editor]
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/github_to_itch/plugin.cfg")
+
+[github_to_itch]
+
+config/itch_username=""
+config/itch_project_name=""

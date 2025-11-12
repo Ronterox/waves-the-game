@@ -48,16 +48,6 @@ jobs:
      mkdir -p ~/.local/share/godot/export_templates/4.3.stable
      mv ./templates/* ~/.local/share/godot/export_templates/4.3.stable
   
-  - name: Export Windows Desktop
-    run: |
-     mkdir -p ./../../../../Downloads
-     ./godot --headless --path ./ --export-release "Windows Desktop" ./../../../../Downloads/Waves The Game.exe
-    
-  - name: Export Linux
-    run: |
-     mkdir -p ./.
-     ./godot --headless --path ./ --export-release "Linux" ././Waves The Game.x86_64
-    
 
   - uses: actions/upload-artifact@v2
     with:

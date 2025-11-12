@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://2fcchhs05ccw"]
+
+[ext_resource type="Script" path="res://ProceduralGenerator.gd" id="1_c2te2"]
+[ext_resource type="PackedScene" uid="uid://l60neplacq62" path="res://Block.tscn" id="1_oqr3r"]
+
+[node name="ProceduralGenerator" type="Node3D"]
+script = ExtResource("1_c2te2")
+
+[node name="Block" parent="." instance=ExtResource("1_oqr3r")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.871479, 0.490432, 0, -0.490432, 0.871479, 5, 10, 20)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.383167, 0.923679, 0, -0.923679, 0.383167, 0, 1.56494, 0)
