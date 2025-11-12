@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+class_name Boat
+
 # Boat settings
 var max_speed = 15.0
 var acceleration = 2.0
@@ -22,7 +24,7 @@ signal anchored(anchor: bool)
 func _ready() -> void:
 	anchored.emit(true)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_down"):
 		anchored.emit(true)
 	elif Input.is_action_just_pressed("ui_up"):
@@ -30,7 +32,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta):
 	# Get input from the Up/Down arrow keys
-	var move_input = Input.get_axis("ui_down", "ui_up")
+	# var move_input = Input.get_axis("ui_down", "ui_up")
 	# Get input from the Left/Right arrow keys
 	var turn_input = Input.get_axis("ui_left", "ui_right")
 	

@@ -6,7 +6,7 @@ uniform vec4 foam_color : source_color = vec4(0.6, 0.8, 1.0, 1.0);
 
 // -- Wave Controls --
 uniform float noise_scale = 256.0;
-uniform float time_speed = 0.001;
+uniform float time_speed : hint_range(0.0, 1.0) = 0.001;
 uniform float foam_hardness : hint_range(0.0, 1.0) = 0.9; // How sharp the edge is
 uniform int octaves = 2; // How many layers of noise to add for detail
 

@@ -7,7 +7,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var speed = $"../Boat".current_speed
 	$MarginContainer/Speed.text = "%.2f m/s" % speed
 
