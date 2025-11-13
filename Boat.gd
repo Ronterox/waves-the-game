@@ -36,13 +36,13 @@ func _physics_process(delta):
 	# var move_input = Input.get_axis("ui_down", "ui_up")
 	# Get input from the Left/Right arrow keys
 	var turn_input = Input.get_axis("ui_left", "ui_right")
-	
+
 	if anchor <= 0:
 		bob_speed *= 0.99
-	
+
 	var music: AudioStreamPlayer3D = $Music
 	music.volume_db = music.max_db * current_speed * (current_speed / max_speed) - 30
-	
+
 	# Smoothly change speed
 	# If we are pressing up or down, move towards our max speed.
 	if anchor > 0:
@@ -71,6 +71,16 @@ func _physics_process(delta):
 
 	# This is the magic function that actually moves our CharacterBody3D and handles collisions.
 	move_and_slide()
+
+	# Check collisions after moving
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+
+		# If we hit a RigidBody3D, apply a push
+		if collider is RigidBody3D:
+			var push_dir = collision.get_normal() * -1.0
+			collider.apply_central_impulse(push_dir * 5.0)
 
 
 func _on_anchored(curr_anchor: float) -> void:

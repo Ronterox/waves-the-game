@@ -69,7 +69,7 @@ void fragment() {
 
     // Apply the final color to the object
     ALBEDO = final_color;
-    
+
     // Set material properties for lighting
     METALLIC = 0.0;    // Water isn't metallic
     ROUGHNESS = 0.2;   // Make water more reflective (lower roughness)
@@ -80,12 +80,12 @@ void fragment() {
 void light() {
     // Calculate how much shadow there is (ATTENUATION.a contains shadow information)
     float shadow_factor = ATTENUATION;
-    
+
     // Mix between full brightness and shadow color based on shadow intensity
     // This prevents shadows from completely blacking out the water
     vec3 lit_color = ALBEDO;
     vec3 shadowed_color = ALBEDO * (1.0 - shadow_intensity);
-    
+
     // Apply the appropriate amount of diffuse light
     DIFFUSE_LIGHT += mix(shadowed_color, lit_color, shadow_factor) * ATTENUATION;
 }

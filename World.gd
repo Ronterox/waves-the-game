@@ -20,3 +20,5 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		generate_world(2)
+	elif Input.is_key_pressed(KEY_ESCAPE):
+		get_tree().quit()
