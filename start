@@ -19,7 +19,9 @@ editor() {
 
 # @cmd Builds and runs the game
 build() {
-	echo TODO: build
+	mkdir -p builds/Linux builds/web
+	godot --headless --export-release Linux builds/Linux/waves.x86_64
+	godot --headless --export-release Web builds/web/waves.html
 }
 
 # See more details at https://github.com/sigoden/argc
